@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bit | official website</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f9fc;
+}
+
+/* Header */
+header {
+    background: white;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+    color: #ee6123;
+    margin: 0;
+}
+
+/* Hero Section */
+.hero {
+    padding: 60px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #555;
+    font-size: 18px;
+}
+
+/* Box */
+.box {
+    background: white;
+    width: 600px;
+    margin: 40px auto;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabs button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.tabs button.active {
+    border-bottom: 3px solid #ee6123;
+    font-weight: bold;
+}
+
+/* Input */
+.input-group {
+    display: flex;
+    margin-top: 25px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.input-group button {
+    padding: 15px 25px;
+    font-size: 16px;
+    background: #ee6123;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    color: green;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Bit</h1>
+    <div>
+        <button>Log in</button>
+        <button style="background:#ee6123;color:white;border:none;padding:8px 12px;border-radius:4px;">
+            Sign up Free
+        </button>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Build stronger digital connections</h2>
+    <p>Short links, QR Codes, and landing pages</p>
+
+    <div class="box">
+        <div class="tabs">
+            <button class="active" onclick="switchTab('link')">Short Link</button>
+            <button onclick="switchTab('qr')">QR Code</button>
+        </div>
+
+        <div class="input-group">
+            <input id="input" type="text" placeholder="Paste a long URL here">
+            <button onclick="generate()">Create</button>
+        </div>
+
+        <div class="result" id="result"></div>
+    </div>
+</section>
+
+<script>
+let mode = "link";
+
+function switchTab(type) {
+    mode = type;
+    document.querySelectorAll(".tabs button").forEach(btn => btn.classList.remove("active"));
+    event.target.classList.add("active");
+
+    document.getElementById("input").placeholder =
+        type === "link" ? "Paste a long URL here" : "Enter text or URL for QR";
+}
+
+function generate() {
+    const value = document.getElementById("input").value;
+    if (!value) return;
+
+    if (mode === "link") {
+        document.getElementById("result").innerText =
+            "Short Link: https://bit.ly/" + Math.random().toString(36).substring(7);
+    } else {
+        document.getElementById("result").innerText =
+            "QR Code generated (UI only)";
+    }
+}
+</script>
+
+</body>
+</html>
